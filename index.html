@@ -1,0 +1,2673 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SafeHer - Women Safety SOS</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #14001f, #3b073e, #09001a);
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    background: rgba(0,0,0,0.35);
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ff4d6d;
+}
+
+.status {
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #1d8f4e;
+    font-size: 13px;
+}
+
+.container {
+    width: 95%;
+    max-width: 1150px;
+    margin: auto;
+    padding: 30px 0 50px;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #ddd;
+    font-size: 16px;
+}
+
+.alert-box {
+    display: none;
+    background: #b00020;
+    border: 2px solid #ff6683;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    animation: flash 0.8s infinite;
+}
+
+.alert-box.show {
+    display: block;
+}
+
+@keyframes flash {
+    50% {
+        opacity: 0.55;
+    }
+}
+
+.sos-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 25px;
+    padding: 35px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
+
+.sos-button {
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    border: 12px solid rgba(255,255,255,0.15);
+    background: #e60039;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+
+    box-shadow:
+        0 0 0 15px rgba(230,0,57,0.15),
+        0 0 60px rgba(230,0,57,0.7);
+
+    transition: 0.2s;
+}
+
+.sos-button:hover {
+    transform: scale(1.04);
+}
+
+.sos-button:active {
+    transform: scale(0.95);
+}
+
+.sos-button.active {
+    animation: sosPulse 0.7s infinite;
+}
+
+@keyframes sosPulse {
+    0% {
+        box-shadow:
+        0 0 0 15px rgba(230,0,57,0.2),
+        0 0 60px rgba(230,0,57,0.8);
+    }
+
+    50% {
+        box-shadow:
+        0 0 0 35px rgba(230,0,57,0.05),
+        0 0 100px rgba(230,0,57,1);
+    }
+
+    100% {
+        box-shadow:
+        0 0 0 15px rgba(230,0,57,0.2),
+        0 0 60px rgba(230,0,57,0.8);
+    }
+}
+
+.sos-info {
+    margin-top: 25px;
+}
+
+.sos-info h2 {
+    color: #ff6683;
+    margin-bottom: 8px;
+}
+
+.countdown {
+    display: none;
+    font-size: 20px;
+    color: #ffccd5;
+    margin-top: 15px;
+}
+
+.countdown.show {
+    display: block;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 22px;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    font-size: 21px;
+}
+
+.card p {
+    color: #ccc;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.location-box {
+    background: rgba(0,0,0,0.25);
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.location-line {
+    margin: 7px 0;
+}
+
+.location-label {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.location-value {
+    font-weight: bold;
+    word-break: break-word;
+}
+
+button,
+input {
+    font-size: 15px;
+}
+
+.action-button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.location-btn {
+    background: #4285f4;
+    color: white;
+}
+
+.share-btn {
+    background: #25d366;
+    color: white;
+}
+
+.sms-btn {
+    background: #1565c0;
+    color: white;
+}
+
+.copy-btn {
+    background: #673ab7;
+    color: white;
+}
+
+.call-btn {
+    background: #ff9800;
+    color: white;
+}
+
+.stop-btn {
+    background: #555;
+    color: white;
+}
+
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.contact-form input {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+.add-btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+}
+
+.contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.25);
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+}
+
+.delete-contact {
+    background: #d50035;
+    color: white;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.surrounding {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch {
+    width: 55px;
+    height: 30px;
+    background: #555;
+    border-radius: 30px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.switch-circle {
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.switch.active {
+    background: #ff4d6d;
+}
+
+.switch.active .switch-circle {
+    transform: translateX(25px);
+}
+
+.sms-status-box {
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.sms-status-box b {
+    color: #66ff99;
+}
+
+footer {
+    text-align: center;
+    color: #aaa;
+    padding: 25px;
+    font-size: 13px;
+}
+
+@media(max-width: 750px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .sos-card {
+        padding: 25px 15px;
+    }
+
+    .sos-button {
+        width: 180px;
+        height: 180px;
+        font-size: 30px;
+    }
+
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        🛡️ Safe<span>Her</span>
+    </div>
+
+    <div class="status" id="systemStatus">
+        🟢 System Ready
+    </div>
+</header>
+
+<div class="container">
+
+<section class="hero">
+    <h1>Women Safety System 🚨</h1>
+
+    <p>
+        Emergency SOS, shake detection, GPS location,
+        SMS and WhatsApp emergency alerts.
+    </p>
+</section>
+
+<!-- ALERT -->
+
+<div class="alert-box" id="alertBox">
+
+    <h2>🚨 EMERGENCY SOS ACTIVATED 🚨</h2>
+
+    <p id="alertMessage">
+        Emergency message is being prepared.
+    </p>
+
+</div>
+
+<!-- SOS -->
+
+<section class="sos-card">
+
+    <button
+        class="sos-button"
+        id="sosButton"
+        onclick="startSOS()">
+
+        SOS
+
+    </button>
+
+    <div class="countdown" id="countdown">
+
+        SOS activating in
+        <span id="countdownNumber">5</span>
+        seconds...
+
+    </div>
+
+    <div class="sos-info">
+
+        <h2>Emergency SOS</h2>
+
+        <p>
+            Press SOS during an emergency. After the countdown,
+            the alarm sounds and SafeHer prepares emergency
+            SMS and WhatsApp alerts using the saved contacts
+            and available GPS location.
+        </p>
+
+        <button
+            class="action-button stop-btn"
+            onclick="cancelSOS()">
+
+            ✋ Cancel SOS
+
+        </button>
+
+    </div>
+
+</section>
+
+<div class="grid">
+
+<!-- LOCATION -->
+
+<section class="card">
+
+    <h2>📍 Live Location</h2>
+
+    <p>
+        Allow location permission so the emergency message
+        can contain your Google Maps location.
+    </p>
+
+    <div class="location-box">
+
+        <div class="location-line">
+            <div class="location-label">Latitude</div>
+
+            <div
+                class="location-value"
+                id="latitude">
+
+                Waiting...
+
+            </div>
+        </div>
+
+        <div class="location-line">
+            <div class="location-label">Longitude</div>
+
+            <div
+                class="location-value"
+                id="longitude">
+
+                Waiting...
+
+            </div>
+        </div>
+
+        <div class="location-line">
+            <div class="location-label">
+                Location status
+            </div>
+
+            <div
+                class="location-value"
+                id="locationStatus">
+
+                Not activated
+
+            </div>
+        </div>
+
+    </div>
+
+    <button
+        class="action-button location-btn"
+        onclick="getLocation()">
+
+        📍 Get My Location
+
+    </button>
+
+    <button
+        class="action-button location-btn"
+        onclick="openMap()">
+
+        🗺️ Open Location on Map
+
+    </button>
+
+</section>
+
+<!-- CONTACTS -->
+
+<section class="card">
+
+    <h2>👥 Emergency Contacts</h2>
+
+    <p>
+        Add trusted people who should receive the emergency
+        alert.
+    </p>
+
+    <div class="contact-form">
+
+        <input
+            type="text"
+            id="contactName"
+            placeholder="Contact name">
+
+        <input
+            type="tel"
+            id="contactPhone"
+            placeholder="Phone number">
+
+        <button
+            class="add-btn"
+            onclick="addContact()">
+
+            Add
+
+        </button>
+
+    </div>
+
+    <div id="contactList"></div>
+
+</section>
+
+<!-- EMERGENCY MESSAGE -->
+
+<section class="card">
+
+    <h2>📨 Emergency Message</h2>
+
+    <p>
+        This message contains the current Google Maps
+        location when GPS is available.
+    </p>
+
+    <div class="location-box">
+
+        <p id="emergencyText">
+            🚨 EMERGENCY ALERT!
+            I may need immediate help.
+            Please contact me and check my current location.
+        </p>
+
+    </div>
+
+    <button
+        class="action-button share-btn"
+        onclick="shareWhatsApp()">
+
+        💬 Send via WhatsApp
+
+    </button>
+
+    <button
+        class="action-button sms-btn"
+        onclick="sendEmergencySMS()">
+
+        📱 Send SMS to Saved Contacts
+
+    </button>
+
+    <button
+        class="action-button copy-btn"
+        onclick="copyEmergencyMessage()">
+
+        📋 Copy Emergency Message
+
+    </button>
+
+    <div class="sms-status-box">
+
+        <b id="smsStatus">
+            SMS status: Ready
+        </b>
+
+        <br><br>
+
+        SMS/WhatsApp browser limitation:
+        SafeHer can open the phone's messaging application
+        with the emergency message prepared. The final
+        Send action may require user confirmation.
+
+    </div>
+
+</section>
+
+<!-- MONITORING -->
+
+<section class="card">
+
+    <div class="surrounding">
+
+        <div>
+
+            <h2>🛡️ Safety Monitoring</h2>
+
+            <p>
+                Enable shake detection and location monitoring.
+            </p>
+
+        </div>
+
+        <div
+            class="switch"
+            id="monitorSwitch"
+            onclick="toggleMonitoring()">
+
+            <div class="switch-circle"></div>
+
+        </div>
+
+    </div>
+
+    <div class="location-box">
+
+        <p>
+            📳 <b>Shake Detection:</b>
+            Strong phone movement can start the SOS countdown.
+        </p>
+
+        <p>
+            🔊 <b>SOS Alarm:</b>
+            The alarm starts after SOS activation.
+        </p>
+
+        <p>
+            📍 <b>GPS:</b>
+            Current location can be added to the emergency
+            message.
+        </p>
+
+        <p>
+            📱 <b>SMS:</b>
+            The phone's SMS application can be opened with
+            the emergency message.
+        </p>
+
+        <p>
+            💬 <b>WhatsApp:</b>
+            WhatsApp can be opened with the emergency message
+            prepared.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CALL -->
+
+<section class="card">
+
+    <h2>📞 Emergency Call</h2>
+
+    <p>
+        Call India's emergency number when immediate
+        assistance is required.
+    </p>
+
+    <button
+        class="action-button call-btn"
+        onclick="callEmergency()">
+
+        📞 Call 112
+
+    </button>
+
+</section>
+
+<!-- INFORMATION -->
+
+<section class="card">
+
+    <h2>⚠️ Emergency Alert Information</h2>
+
+    <p>
+        When SOS activates, SafeHer gets the latest available
+        GPS position and creates an emergency message.
+    </p>
+
+    <p>
+        SafeHer can then open the native SMS application and
+        WhatsApp with the emergency message prepared.
+    </p>
+
+    <p>
+        ⚠️ A normal browser cannot silently press the final
+        Send button for SMS or WhatsApp. Fully automatic
+        background delivery requires a secure server/service.
+    </p>
+
+</section>
+
+</div>
+</div>
+
+<footer>
+
+    🛡️ SafeHer Women Safety System
+    • SOS • GPS • SMS • WhatsApp • Shake Detection
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
+let smsQueue = [];
+let smsIndex = 0;
+
+let automaticAlertInProgress = false;
+
+let contacts =
+    JSON.parse(localStorage.getItem("safeHerContacts")) || [];
+
+let currentLatitude = null;
+let currentLongitude = null;
+
+let monitoring = false;
+
+let audioContext = null;
+let oscillator = null;
+let gainNode = null;
+let alarmPulseTimer = null;
+
+let countdownTimer = null;
+let countdownValue = 5;
+
+let locationWatchId = null;
+
+
+/* =====================================================
+   LOCATION
+===================================================== */
+
+function getLocation() {
+
+    if (!navigator.geolocation) {
+
+        document.getElementById("locationStatus").innerText =
+            "❌ Geolocation not supported";
+
+        return;
+    }
+
+    document.getElementById("locationStatus").innerText =
+        "📍 Requesting GPS permission...";
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            setLocation(position);
+
+        },
+
+        function() {
+
+            document.getElementById("locationStatus").innerText =
+                "❌ Location unavailable";
+
+            updateEmergencyMessage();
+
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+
+
+/* =====================================================
+   SET LOCATION
+===================================================== */
+
+function setLocation(position) {
+
+    currentLatitude =
+        position.coords.latitude;
+
+    currentLongitude =
+        position.coords.longitude;
+
+    document.getElementById("latitude").innerText =
+        currentLatitude.toFixed(6);
+
+    document.getElementById("longitude").innerText =
+        currentLongitude.toFixed(6);
+
+    document.getElementById("locationStatus").innerText =
+        "🟢 Location available";
+
+    updateEmergencyMessage();
+}
+
+
+/* =====================================================
+   LIVE LOCATION
+===================================================== */
+
+function startLiveLocation() {
+
+    if (!navigator.geolocation) return;
+
+    if (locationWatchId !== null) {
+
+        navigator.geolocation.clearWatch(
+            locationWatchId
+        );
+    }
+
+    locationWatchId =
+        navigator.geolocation.watchPosition(
+
+            function(position) {
+
+                setLocation(position);
+
+                document.getElementById(
+                    "locationStatus"
+                ).innerText =
+                    "🟢 Live location active";
+            },
+
+            function() {
+
+                document.getElementById(
+                    "locationStatus"
+                ).innerText =
+                    "❌ Location unavailable";
+            },
+
+            {
+                enableHighAccuracy: true,
+                maximumAge: 3000,
+                timeout: 10000
+            }
+        );
+}
+
+
+/* =====================================================
+   STOP LIVE LOCATION
+===================================================== */
+
+function stopLiveLocation() {
+
+    if (locationWatchId !== null) {
+
+        navigator.geolocation.clearWatch(
+            locationWatchId
+        );
+
+        locationWatchId = null;
+    }
+}
+
+
+/* =====================================================
+   GOOGLE MAP
+===================================================== */
+
+function getMapURL() {
+
+    if (
+        currentLatitude === null ||
+        currentLongitude === null
+    ) {
+
+        return null;
+    }
+
+    return (
+        "https://www.google.com/maps?q=" +
+        currentLatitude +
+        "," +
+        currentLongitude
+    );
+}
+
+
+function openMap() {
+
+    const mapURL = getMapURL();
+
+    if (!mapURL) {
+
+        getLocation();
+
+        alert(
+            "Please allow location access first."
+        );
+
+        return;
+    }
+
+    window.open(
+        mapURL,
+        "_blank"
+    );
+}
+
+
+/* =====================================================
+   EMERGENCY MESSAGE
+===================================================== */
+
+function getEmergencyMessage() {
+
+    let locationText =
+        "Location unavailable";
+
+    const mapURL =
+        getMapURL();
+
+    if (mapURL) {
+
+        locationText =
+            mapURL;
+    }
+
+    return (
+        "🚨 SAFEHER EMERGENCY ALERT 🚨\n\n" +
+
+        "I may need immediate help.\n" +
+
+        "Please contact me as soon as possible.\n\n" +
+
+        "📍 My Google Maps location:\n" +
+
+        locationText +
+
+        "\n\n🕒 Time:\n" +
+
+        new Date().toLocaleString("en-IN") +
+
+        "\n\n🛡️ SafeHer Emergency System"
+    );
+}
+
+
+function updateEmergencyMessage() {
+
+    document.getElementById(
+        "emergencyText"
+    ).innerText =
+        getEmergencyMessage();
+}
+
+
+/* =====================================================
+   SOS COUNTDOWN
+===================================================== */
+
+function startSOS() {
+
+    if (countdownTimer) {
+        return;
+    }
+
+    if (contacts.length === 0) {
+
+        alert(
+            "Please add at least one emergency contact before activating SOS."
+        );
+
+        return;
+    }
+
+    countdownValue = 5;
+
+    document
+        .getElementById("countdown")
+        .classList.add("show");
+
+    document.getElementById(
+        "countdownNumber"
+    ).innerText =
+        countdownValue;
+
+    document.getElementById(
+        "systemStatus"
+    ).innerText =
+        "🟠 SOS Countdown";
+
+    /* Get GPS while countdown is running */
+
+    getLocation();
+
+    countdownTimer =
+        setInterval(function() {
+
+            countdownValue--;
+
+            document.getElementById(
+                "countdownNumber"
+            ).innerText =
+                countdownValue;
+
+            if (countdownValue <= 0) {
+
+                clearInterval(
+                    countdownTimer
+                );
+
+                countdownTimer = null;
+
+                activateSOS();
+            }
+
+        }, 1000);
+}
+
+
+/* =====================================================
+   CANCEL SOS
+===================================================== */
+
+function cancelSOS() {
+
+    if (countdownTimer) {
+
+        clearInterval(
+            countdownTimer
+        );
+
+        countdownTimer = null;
+    }
+
+    document
+        .getElementById("countdown")
+        .classList.remove("show");
+
+    stopAlarm();
+
+    document
+        .getElementById("sosButton")
+        .classList.remove("active");
+
+    document
+        .getElementById("alertBox")
+        .classList.remove("show");
+
+    document.getElementById(
+        "systemStatus"
+    ).innerText =
+        "🟢 System Ready";
+
+    document.getElementById(
+        "smsStatus"
+    ).innerText =
+        "SMS status: SOS cancelled.";
+}
+
+
+/* =====================================================
+   ACTIVATE SOS
+===================================================== */
+
+function activateSOS() {
+
+    document
+        .getElementById("countdown")
+        .classList.remove("show");
+
+    document
+        .getElementById("sosButton")
+        .classList.add("active");
+
+    document
+        .getElementById("alertBox")
+        .classList.add("show");
+
+    document.getElementById(
+        "systemStatus"
+    ).innerText =
+        "🔴 EMERGENCY ACTIVE";
+
+    document.getElementById(
+        "alertMessage"
+    ).innerText =
+        "🚨 SOS ACTIVE! Alarm started. Getting location and preparing emergency alerts...";
+
+    /* Start loud alarm */
+
+    startAlarm();
+
+    /* Notification */
+
+    notifyEmergency();
+
+    /* Get fresh GPS first */
+
+    requestLatestLocationForSOS();
+}
+const AUTO_SMS_ENDPOINT =
+    "https://your-safether-server.com/api/emergency-alert";
+/* =====================================================
+   GET LATEST LOCATION BEFORE ALERT
+===================================================== */
+
+function requestLatestLocationForSOS() {
+
+    if (!navigator.geolocation) {
+
+        prepareEmergencyAlerts();
+
+        return;
+    }
+
+    document.getElementById(
+        "smsStatus"
+    ).innerText =
+        "SMS status: Getting latest GPS location...";
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            setLocation(position);
+
+            prepareEmergencyAlerts();
+
+        },
+
+        function() {
+
+            document.getElementById(
+                "locationStatus"
+            ).innerText =
+                "❌ GPS unavailable";
+
+            /*
+             If GPS fails, the emergency message is still
+             prepared and clearly states that location is
+             unavailable.
+            */
+
+            prepareEmergencyAlerts();
+
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+/* =====================================================
+   PREPARE EMERGENCY ALERTS
+   ===================================================== */
+
+   function prepareEmergencyAlerts() {
+
+    updateEmergencyMessage();
+
+    document.getElementById("alertMessage").innerText =
+        "🚨 SOS ACTIVE! Alarm is sounding. Sending emergency alerts...";
+
+    // Automatically send through secure server
+    sendAutomaticEmergencyAlert();
+
+    // Open WhatsApp as browser fallback
+    setTimeout(function() {
+
+        openEmergencyWhatsApp();
+
+    }, 1500);
+}
+async function sendAutomaticEmergencyAlert() {
+
+    if (automaticAlertInProgress) {
+        return;
+    }
+
+    if (contacts.length === 0) {
+
+        document.getElementById("smsStatus").innerText =
+            "SMS status: No emergency contacts saved.";
+
+        return;
+    }
+
+    automaticAlertInProgress = true;
+
+    const message = getEmergencyMessage();
+
+    const contactNumbers = contacts
+        .map(function(contact) {
+
+            return {
+                name: contact.name,
+                phone: cleanPhoneNumber(contact.phone)
+            };
+
+        })
+        .filter(function(contact) {
+
+            return contact.phone.length > 0;
+
+        });
+
+    if (contactNumbers.length === 0) {
+
+        document.getElementById("smsStatus").innerText =
+            "SMS status: No valid phone numbers.";
+
+        automaticAlertInProgress = false;
+
+        return;
+    }
+
+    document.getElementById("smsStatus").innerText =
+        "🚨 Sending automatic SMS alerts...";
+
+    try {
+
+        const response = await fetch(
+            AUTO_SMS_ENDPOINT,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    source: "SafeHer",
+
+                    message: message,
+
+                    contacts: contactNumbers,
+
+                    location: {
+                        latitude: currentLatitude,
+                        longitude: currentLongitude,
+                        mapsUrl: getMapURL()
+                    },
+
+                    timestamp:
+                        new Date().toISOString()
+                })
+            }
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server returned HTTP " +
+                response.status
+            );
+        }
+
+        const result = await response.json();
+
+        document.getElementById("smsStatus").innerText =
+            "✅ Emergency SMS sent to " +
+            contactNumbers.length +
+            " contact(s).";
+
+        document.getElementById("alertMessage").innerText =
+            "🚨 SOS ACTIVE! Emergency SMS alerts were sent.";
+
+        console.log(
+            "Automatic emergency alert:",
+            result
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Automatic SMS failed:",
+            error
+        );
+
+        document.getElementById("smsStatus").innerText =
+            "⚠️ Automatic SMS unavailable. Opening phone SMS.";
+
+        // Browser fallback
+        setTimeout(function() {
+
+            openEmergencySMS();
+
+        }, 500);
+
+    } finally {
+
+        automaticAlertInProgress = false;
+    }
+}
+/* =====================================================
+   CLEAN PHONE NUMBER
+===================================================== */
+
+function cleanPhoneNumber(phone) {
+
+    return String(phone || "")
+        .replace(/[^\d+]/g, "");
+}
+
+
+/* =====================================================
+   GET CONTACT NUMBERS
+===================================================== */
+
+function buildSMSRecipients() {
+
+    return contacts
+        .map(function(contact) {
+
+            return cleanPhoneNumber(
+                contact.phone
+            );
+
+        })
+        .filter(Boolean);
+}
+/* =====================================================
+   OPEN SMS APPLICATION
+   ===================================================== */
+
+function openEmergencySMS() {
+
+    const recipients =
+        buildSMSRecipients();
+
+    if (!recipients.length) {
+
+        document.getElementById(
+            "smsStatus"
+        ).innerText =
+            "SMS status: No valid phone numbers.";
+
+        return;
+    }
+
+    const message =
+        getEmergencyMessage();
+
+    const recipientList =
+        recipients.join(",");
+
+    const smsURL =
+        "sms:" +
+        recipientList +
+        "?body=" +
+        encodeURIComponent(message);
+
+    document.getElementById(
+        "smsStatus"
+    ).innerText =
+        "📱 Opening SMS application for " +
+        recipients.length +
+        " emergency contact(s)...";
+
+    /* STEP 6 FALLBACK */
+
+    window.location.href =
+        smsURL;
+}
+
+
+
+/* =====================================================
+   OPEN SMS FOR ONE CONTACT
+   ===================================================== */
+
+function openSMSForContact(index) {
+
+    if (
+        index < 0 ||
+        index >= contacts.length
+    ) {
+        return;
+    }
+
+    const phone =
+        cleanPhoneNumber(
+            contacts[index].phone
+        );
+        /* =====================================================
+   AUTOMATIC EMERGENCY ALERT
+   ===================================================== */
+   ```javascript
+/* =====================================================
+   AUTOMATIC EMERGENCY ALERT
+   ===================================================== */
+
+/*
+ IMPORTANT:
+ Replace this with YOUR secure backend endpoint.
+
+ The backend is responsible for sending SMS.
+ Do NOT put Twilio/API keys or other SMS credentials
+ inside this HTML file.
+*/
+const AUTO_SMS_ENDPOINT =
+    "https://your-safether-server.com/api/emergency-alert";
+
+let automaticAlertInProgress = false;
+
+
+/* =====================================================
+   PREPARE EMERGENCY ALERTS
+   ===================================================== */
+
+function prepareEmergencyAlerts() {
+
+    updateEmergencyMessage();
+
+    document.getElementById("alertMessage").innerText =
+        "🚨 SOS ACTIVE! Alarm is sounding. Sending emergency alerts...";
+
+    /*
+       Send automatically through the secure server.
+
+       IMPORTANT:
+       This function does NOT open SMS or WhatsApp.
+    */
+    sendAutomaticEmergencyAlert();
+}
+
+
+/* =====================================================
+   SEND AUTOMATIC EMERGENCY ALERT
+   ===================================================== */
+
+async function sendAutomaticEmergencyAlert() {
+
+    if (automaticAlertInProgress) {
+        return;
+    }
+
+    if (contacts.length === 0) {
+
+        document.getElementById("smsStatus").innerText =
+            "SMS status: No emergency contacts saved.";
+
+        return;
+    }
+
+    automaticAlertInProgress = true;
+
+    const message =
+        getEmergencyMessage();
+
+    /*
+       Prepare saved contact numbers.
+    */
+
+    const contactNumbers = contacts
+        .map(function(contact) {
+
+            return {
+                name: contact.name,
+                phone: cleanPhoneNumber(contact.phone)
+            };
+
+        })
+        .filter(function(contact) {
+
+            return contact.phone.length > 0;
+
+        });
+
+
+    if (contactNumbers.length === 0) {
+
+        document.getElementById("smsStatus").innerText =
+            "SMS status: No valid phone numbers.";
+
+        automaticAlertInProgress = false;
+
+        return;
+    }
+
+
+    document.getElementById("smsStatus").innerText =
+        "🚨 Sending automatic SMS alerts...";
+
+
+    try {
+
+        const response = await fetch(
+            AUTO_SMS_ENDPOINT,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    source: "SafeHer",
+
+                    message: message,
+
+                    contacts: contactNumbers,
+
+                    location: {
+
+                        latitude:
+                            currentLatitude,
+
+                        longitude:
+                            currentLongitude,
+
+                        mapsUrl:
+                            getMapURL()
+                    },
+
+                    timestamp:
+                        new Date().toISOString()
+
+                })
+            }
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server returned HTTP " +
+                response.status
+            );
+        }
+
+
+        const result =
+            await response.json();
+
+
+        /*
+           SUCCESS
+        */
+
+        document.getElementById("smsStatus").innerText =
+            "✅ Automatic emergency SMS sent to " +
+            contactNumbers.length +
+            " contact(s).";
+
+
+        document.getElementById("alertMessage").innerText =
+            "🚨 SOS ACTIVE! Emergency SMS has been sent to your saved contacts.";
+
+
+        console.log(
+            "SafeHer automatic SMS result:",
+            result
+        );
+
+
+        /*
+           IMPORTANT:
+           Do NOT open SMS application.
+           Do NOT open WhatsApp.
+        */
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "SafeHer automatic SMS failed:",
+            error
+        );
+
+
+        document.getElementById("smsStatus").innerText =
+            "❌ Automatic SMS could not be sent. Server unavailable.";
+
+
+        document.getElementById("alertMessage").innerText =
+            "🚨 SOS ACTIVE! Alarm is sounding, but automatic SMS delivery failed.";
+
+
+        /*
+           IMPORTANT:
+           No automatic SMS or WhatsApp window is opened.
+        */
+
+    }
+
+    finally {
+
+        automaticAlertInProgress = false;
+    }
+}
+
+
+/* =====================================================
+   CLEAN PHONE NUMBER
+   ===================================================== */
+
+function cleanPhoneNumber(phone) {
+
+    return String(phone || "")
+        .replace(/[^\d+]/g, "");
+}
+
+
+/* =====================================================
+   GET SAVED CONTACT NUMBERS
+   ===================================================== */
+
+function buildSMSRecipients() {
+
+    return contacts
+        .map(function(contact) {
+
+            return cleanPhoneNumber(
+                contact.phone
+            );
+
+        })
+        .filter(Boolean);
+}
+
+
+/* =====================================================
+   MANUAL SMS
+   ===================================================== */
+
+/*
+   This function is ONLY for the user's manual
+   "Send SMS to Saved Contacts" button.
+
+   It does not run automatically during SOS.
+*/
+
+function sendEmergencySMS() {
+
+    if (!contacts.length) {
+
+        alert(
+            "Please add at least one emergency contact."
+        );
+
+        return;
+    }
+
+
+    document.getElementById("smsStatus").innerText =
+        "SMS status: Preparing emergency message...";
+
+
+    if (
+        currentLatitude === null ||
+        currentLongitude === null
+    ) {
+
+        if (!navigator.geolocation) {
+
+            openEmergencySMS();
+
+            return;
+        }
+
+
+        navigator.geolocation.getCurrentPosition(
+
+            function(position) {
+
+                setLocation(position);
+
+                openEmergencySMS();
+
+            },
+
+            function() {
+
+                openEmergencySMS();
+
+            },
+
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+
+    } else {
+
+        openEmergencySMS();
+    }
+}
+
+
+/* =====================================================
+   MANUAL SMS APPLICATION
+   ===================================================== */
+
+function openEmergencySMS() {
+
+    const recipients =
+        buildSMSRecipients();
+
+
+    if (!recipients.length) {
+
+        document.getElementById("smsStatus").innerText =
+            "SMS status: No valid phone numbers.";
+
+        return;
+    }
+
+
+    const message =
+        getEmergencyMessage();
+
+
+    const recipientList =
+        recipients.join(",");
+
+
+    const smsURL =
+        "sms:" +
+        recipientList +
+        "?body=" +
+        encodeURIComponent(message);
+
+
+    document.getElementById("smsStatus").innerText =
+        "📱 Opening SMS application...";
+
+
+    /*
+       ONLY happens when the user manually presses
+       the SMS button or when openEmergencySMS()
+       is explicitly called.
+    */
+
+    window.location.href =
+        smsURL;
+}
+
+
+/* =====================================================
+   MANUAL WHATSAPP
+   ===================================================== */
+
+function shareWhatsApp() {
+
+    const message =
+        getEmergencyMessage();
+
+
+    if (!contacts.length) {
+
+        alert(
+            "Please add at least one emergency contact."
+        );
+
+        return;
+    }
+
+
+    const whatsappURL =
+        "https://wa.me/?text=" +
+        encodeURIComponent(message);
+
+
+    /*
+       WhatsApp opens ONLY after the user presses
+       the WhatsApp button.
+    */
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+}
+```
+
+
+async function sendAutomaticEmergencyAlert() {
+
+    if (automaticAlertInProgress) {
+        return;
+    }
+
+    if (contacts.length === 0) {
+
+        document.getElementById("smsStatus").innerText =
+            "SMS status: No emergency contacts saved.";
+
+        return;
+    }
+
+    automaticAlertInProgress = true;
+
+    const message = getEmergencyMessage();
+
+    const contactNumbers = contacts
+        .map(function(contact) {
+
+            return {
+                name: contact.name,
+                phone: cleanPhoneNumber(contact.phone)
+            };
+
+        })
+        .filter(function(contact) {
+
+            return contact.phone.length > 0;
+
+        });
+
+    if (contactNumbers.length === 0) {
+
+        document.getElementById("smsStatus").innerText =
+            "SMS status: No valid phone numbers.";
+
+        automaticAlertInProgress = false;
+
+        return;
+    }
+
+    document.getElementById("smsStatus").innerText =
+        "🚨 Sending automatic emergency alerts...";
+
+    try {
+
+        const response = await fetch(
+            AUTO_SMS_ENDPOINT,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    message: message,
+
+                    contacts: contactNumbers,
+
+                    location: {
+                        latitude: currentLatitude,
+                        longitude: currentLongitude,
+                        mapsUrl: getMapURL()
+                    },
+
+                    timestamp:
+                        new Date().toISOString(),
+
+                    source: "SafeHer"
+                })
+            }
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server returned HTTP " +
+                response.status
+            );
+        }
+
+        const result =
+            await response.json();
+
+        document.getElementById("smsStatus").innerText =
+            "✅ Emergency alert sent automatically to " +
+            contactNumbers.length +
+            " contact(s).";
+
+        document.getElementById("alertMessage").innerText =
+            "🚨 SOS ACTIVE! Emergency alerts have been sent to your saved contacts.";
+
+        console.log(
+            "Automatic alert result:",
+            result
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Automatic SMS error:",
+            error
+        );
+
+        document.getElementById("smsStatus").innerText =
+            "⚠️ Automatic SMS failed. Opening phone SMS.";
+
+        /*
+         * Fallback to the phone's SMS application.
+         */
+
+        setTimeout(function() {
+
+            openEmergencySMS();
+
+        }, 500);
+
+    } finally {
+
+        automaticAlertInProgress = false;
+    }
+}
+
+    if (!phone) {
+        return;
+    }
+
+    const message =
+        getEmergencyMessage();
+
+    const smsURL =
+        "sms:" +
+        phone +
+        "?body=" +
+        encodeURIComponent(message);
+
+    window.location.href =
+        smsURL;
+}
+
+
+/* =====================================================
+   MANUAL SMS BUTTON
+===================================================== */
+
+function sendEmergencySMS() {
+
+    if (!contacts.length) {
+
+        alert(
+            "Please add at least one emergency contact."
+        );
+
+        return;
+    }
+
+    document.getElementById(
+        "smsStatus"
+    ).innerText =
+        "SMS status: Preparing emergency message...";
+
+    /*
+       Get fresh GPS first.
+    */
+
+    if (
+        currentLatitude === null ||
+        currentLongitude === null
+    ) {
+
+        if (!navigator.geolocation) {
+
+            openEmergencySMS();
+
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+
+            function(position) {
+
+                setLocation(position);
+
+                openEmergencySMS();
+
+            },
+
+            function() {
+
+                openEmergencySMS();
+
+            },
+
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+
+    } else {
+
+        openEmergencySMS();
+    }
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function openEmergencyWhatsApp() {
+
+    const message = getEmergencyMessage();
+
+    if (contacts.length === 0) {
+
+        document.getElementById("smsStatus").innerText =
+            "WhatsApp: No emergency contacts saved.";
+
+        return;
+    }
+
+    const whatsappURL =
+        "https://wa.me/?text=" +
+        encodeURIComponent(message);
+
+    document.getElementById("smsStatus").innerText =
+        "💬 Opening WhatsApp with emergency message...";
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+}
+
+function shareWhatsApp() {
+
+    openEmergencyWhatsApp();
+
+}
+/* =====================================================
+   MANUAL WHATSAPP BUTTON
+===================================================== */
+
+function shareWhatsApp() {
+
+    openEmergencyWhatsApp();
+}
+
+
+/* =====================================================
+   COPY MESSAGE
+===================================================== */
+
+function copyEmergencyMessage() {
+
+    const message =
+        getEmergencyMessage();
+
+    if (
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+    ) {
+
+        navigator.clipboard.writeText(
+            message
+        )
+        .then(function() {
+
+            alert(
+                "Emergency message copied!"
+            );
+
+        })
+        .catch(function() {
+
+            alert(
+                "Unable to copy message."
+            );
+
+        });
+
+    } else {
+
+        alert(
+            "Clipboard is not available."
+        );
+    }
+}
+
+
+/* =====================================================
+   SOS ALARM
+===================================================== */
+
+function startAlarm() {
+
+    try {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        if (!AudioContext) {
+            return;
+        }
+
+        audioContext =
+            new AudioContext();
+
+        oscillator =
+            audioContext.createOscillator();
+
+        gainNode =
+            audioContext.createGain();
+
+        oscillator.type =
+            "sawtooth";
+
+        oscillator.frequency.value =
+            900;
+
+        gainNode.gain.value =
+            0.35;
+
+        oscillator.connect(
+            gainNode
+        );
+
+        gainNode.connect(
+            audioContext.destination
+        );
+
+        oscillator.start();
+
+        let direction = 1;
+
+        alarmPulseTimer =
+            setInterval(function() {
+
+                if (!oscillator) {
+                    return;
+                }
+
+                oscillator.frequency.value =
+                    direction === 1
+                        ? 1100
+                        : 650;
+
+                direction *= -1;
+
+            }, 350);
+
+    } catch (error) {
+
+        console.log(
+            "Audio error:",
+            error
+        );
+    }
+}
+
+
+/* =====================================================
+   STOP ALARM
+===================================================== */
+
+function stopAlarm() {
+
+    try {
+
+        if (alarmPulseTimer) {
+
+            clearInterval(
+                alarmPulseTimer
+            );
+
+            alarmPulseTimer = null;
+        }
+
+        if (oscillator) {
+
+            oscillator.stop();
+
+            oscillator.disconnect();
+
+            oscillator = null;
+        }
+
+        if (audioContext) {
+
+            audioContext.close();
+
+            audioContext = null;
+        }
+
+    } catch (error) {
+
+        console.log(error);
+    }
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+function notifyEmergency() {
+
+    if (!("Notification" in window)) {
+        return;
+    }
+
+    if (
+        Notification.permission ===
+        "granted"
+    ) {
+
+        new Notification(
+            "🚨 SafeHer Emergency Alert",
+            {
+                body:
+                    "SOS activated. Emergency alerts are being prepared."
+            }
+        );
+    }
+}
+
+
+/* =====================================================
+   MONITORING
+===================================================== */
+
+function toggleMonitoring() {
+
+    monitoring = !monitoring;
+
+    const switchElement =
+        document.getElementById(
+            "monitorSwitch"
+        );
+
+    if (monitoring) {
+
+        switchElement.classList.add(
+            "active"
+        );
+
+        document.getElementById(
+            "systemStatus"
+        ).innerText =
+            "🟢 Safety Monitoring ON";
+
+        getLocation();
+
+        startLiveLocation();
+
+        requestNotificationPermission();
+
+        /*
+           Request motion permission on iPhone/iPad
+           when required.
+        */
+
+        requestMotionPermission();
+
+        alert(
+            "Safety monitoring enabled.\n\n" +
+            "Shake detection and location monitoring are active."
+        );
+
+    } else {
+
+        switchElement.classList.remove(
+            "active"
+        );
+
+        stopLiveLocation();
+
+        document.getElementById(
+            "systemStatus"
+        ).innerText =
+            "🟢 System Ready";
+    }
+}
+
+
+/* =====================================================
+   NOTIFICATION PERMISSION
+===================================================== */
+
+function requestNotificationPermission() {
+
+    if (
+        "Notification" in window &&
+        Notification.permission === "default"
+    ) {
+
+        Notification.requestPermission();
+    }
+}
+
+
+/* =====================================================
+   MOTION PERMISSION
+===================================================== */
+
+async function requestMotionPermission() {
+
+    try {
+
+        if (
+            typeof DeviceMotionEvent !==
+            "undefined" &&
+
+            typeof DeviceMotionEvent.requestPermission ===
+            "function"
+        ) {
+
+            const permission =
+                await DeviceMotionEvent.requestPermission();
+
+            if (permission !== "granted") {
+
+                console.log(
+                    "Motion permission not granted."
+                );
+            }
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Motion permission error:",
+            error
+        );
+    }
+}
+
+
+/* =====================================================
+   SHAKE DETECTION
+===================================================== */
+
+let lastAcceleration = {
+    x: 0,
+    y: 0,
+    z: 0
+};
+
+let lastShakeTime = 0;
+
+function handleMotion(event) {
+
+    if (!monitoring) {
+        return;
+    }
+
+    const acceleration =
+        event.accelerationIncludingGravity;
+
+    if (!acceleration) {
+        return;
+    }
+
+    const x =
+        acceleration.x || 0;
+
+    const y =
+        acceleration.y || 0;
+
+    const z =
+        acceleration.z || 0;
+
+    const change =
+        Math.abs(
+            x - lastAcceleration.x
+        ) +
+
+        Math.abs(
+            y - lastAcceleration.y
+        ) +
+
+        Math.abs(
+            z - lastAcceleration.z
+        );
+
+    const now =
+        Date.now();
+
+    if (
+        change > 35 &&
+        now - lastShakeTime > 3000
+    ) {
+
+        lastShakeTime =
+            now;
+
+        startSOS();
+    }
+
+    lastAcceleration = {
+        x,
+        y,
+        z
+    };
+}
+
+
+/* =====================================================
+   CONTACTS
+===================================================== */
+
+function addContact() {
+
+    const name =
+        document
+            .getElementById("contactName")
+            .value
+            .trim();
+
+    const phone =
+        document
+            .getElementById("contactPhone")
+            .value
+            .trim();
+
+    if (!name || !phone) {
+
+        alert(
+            "Enter contact name and phone number."
+        );
+
+        return;
+    }
+
+    contacts.push({
+        name: name,
+        phone: phone
+    });
+
+    localStorage.setItem(
+        "safeHerContacts",
+        JSON.stringify(contacts)
+    );
+
+    document.getElementById(
+        "contactName"
+    ).value = "";
+
+    document.getElementById(
+        "contactPhone"
+    ).value = "";
+
+    renderContacts();
+}
+
+
+/* =====================================================
+   DELETE CONTACT
+===================================================== */
+
+function deleteContact(index) {
+
+    contacts.splice(
+        index,
+        1
+    );
+
+    localStorage.setItem(
+        "safeHerContacts",
+        JSON.stringify(contacts)
+    );
+
+    renderContacts();
+}
+
+
+/* =====================================================
+   RENDER CONTACTS
+===================================================== */
+
+function renderContacts() {
+
+    const list =
+        document.getElementById(
+            "contactList"
+        );
+
+    list.innerHTML = "";
+
+    contacts.forEach(
+        function(contact, index) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "contact";
+
+            div.innerHTML = `
+
+                <div>
+
+                    <b>
+                        👤 ${escapeHTML(contact.name)}
+                    </b>
+
+                    <br>
+
+                    <small>
+                        ${escapeHTML(contact.phone)}
+                    </small>
+
+                </div>
+
+                <button
+                    class="delete-contact"
+                    onclick="deleteContact(${index})">
+
+                    Delete
+
+                </button>
+            `;
+
+            list.appendChild(div);
+        }
+    );
+}
+
+
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+
+/* =====================================================
+   EMERGENCY CALL
+===================================================== */
+
+function callEmergency() {
+
+    window.location.href =
+        "tel:112";
+}
+
+
+/* =====================================================
+   KEYBOARD ESCAPE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            document
+                .getElementById("alertBox")
+                .classList
+                .contains("show")
+        ) {
+
+            cancelSOS();
+        }
+    }
+);
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+renderContacts();
+
+updateEmergencyMessage();
+
+
+/*
+   Preload GPS.
+*/
+
+if (navigator.geolocation) {
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            setLocation(position);
+        },
+
+        function() {
+
+            // Location permission may be denied.
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+
+
+/*
+   Shake detection.
+*/
+
+if ("DeviceMotionEvent" in window) {
+
+    window.addEventListener(
+        "devicemotion",
+        handleMotion
+    );
+}
+
+</script>
+
+</body>
+</html>
