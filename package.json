@@ -1,0 +1,20 @@
+{
+  "name": "safeher-sms-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "SafeHer emergency SMS backend using Twilio",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "twilio": "^5.10.0"
+  }
+}
