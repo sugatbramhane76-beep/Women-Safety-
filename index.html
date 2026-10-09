@@ -2668,8 +2668,58 @@ if ("DeviceMotionEvent" in window) {
 }
 
 </script>
-<script src="server.js"></script>
-<script src="package.json"></script>
+<script src="server.js"></script> 
+<script>
+      <!-- Your existing SafeHer HTML content -->
+
+  <!-- ADD THE LOGIN CODE HERE -->
+
+    const API = "http://localhost:3000";
+
+    async function login(email, password) {
+      const response = await fetch(`${API}/api/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed");
+      }
+
+      window.safeHerToken = data.token;
+      return data;
+    }
+    
+async function sendSafeHerSOS(latitude, longitude) {
+  const response = await fetch(
+    `${API}/api/sos`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${window.safeHerToken}`
+      },
+      body: JSON.stringify({ latitude, longitude })
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || "SOS request failed");
+  }
+
+  return result;
+}
+
+// Call after your existing SOS countdown and
+// location retrieval, once the user confirms SOS.
+</script>
 
 </body>
 </html>
