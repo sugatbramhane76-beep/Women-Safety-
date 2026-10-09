@@ -65,3 +65,5 @@ app.post("/api/emergency-alert", async (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log("SafeHer SMS backend is running.");
 });
+const AUTO_SMS_ENDPOINT =
+    "https://your-safether-server.com/api/emergency-alert";
